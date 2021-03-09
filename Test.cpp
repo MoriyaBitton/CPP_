@@ -25,9 +25,11 @@ TEST_CASE("Good snowman code") {
 
 TEST_CASE("Bad snowman code") {
     int negative = -7;
+    int long_ = -1740789565;
     CHECK_THROWS(snowman(5));
-    CHECK_THROWS(snowman(11114410));
     CHECK_THROWS(snowman(91114411));
+    CHECK_THROWS(snowman(11114410));
+    CHECK_THROWS(snowman(long_));
     CHECK_THROWS(snowman(negative));
     CHECK_THROWS(snowman((int)0.590));
     CHECK_THROWS(snowman(111));
