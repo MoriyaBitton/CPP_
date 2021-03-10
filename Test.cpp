@@ -21,168 +21,171 @@ TEST_CASE("Good snowman code") {
     CHECK(nospaces(snowman(22221122)) == nospaces("___ \n .....\n(o.o)\n<(] [)>\n(\" \")"));
     CHECK(nospaces(snowman(33332233)) == nospaces("  _  \n  /_\\ \n\\(O_O)/\n(> <)\n(___)"));
     CHECK(nospaces(snowman(44441144)) == nospaces("___ \n (_*_)\n(- -)\n<(   )>\n(   )"));
+    
+    CHECK(nospaces(snowman(33232124)) == nospaces("  _  \n  /_\\ \n\\(o_O)\n (] [)>\n (   )"));
+    CHECK(nospaces(snowman(12222212)) == nospaces(" _===_\n\\(o.o)/\n ( : )\n (\" \")"));
+    CHECK(nospaces(snowman(44444432)) == nospaces(" ___\n(_*_)\n(- -)\n(> <)\n(\" \")"));
+    CHECK(nospaces(snowman(44441144)) == nospaces("___ \n (_*_)\n(- -)\n<(   )>\n(   )"));
+    CHECK(nospaces(snowman(41341144)) == nospaces("  ___\n (_*_)\n (O,-)\n<(   )>\n (   )"));
+    CHECK(nospaces(snowman(11111111)) == nospaces(" _===_\n (.,.)\n<( : )>\n ( : )"));
+    CHECK(nospaces(snowman(22222222)) == nospaces("  ___\n .....\n\\(o.o)/\n (] [)\n (\" \")"));
+    CHECK(nospaces(snowman(23232223)) == nospaces("  ___\n .....\n\\(o_O)/\n (] [)\n (___)"));
 }
 
 TEST_CASE("Bad snowman code") {
-    int negative = -7;
-    int long_ = -1740789565;
     CHECK_THROWS(snowman(5));
-    CHECK_THROWS(snowman(91114411));
     CHECK_THROWS(snowman(11114410));
-    CHECK_THROWS(snowman(long_));
-    CHECK_THROWS(snowman(negative));
-    CHECK_THROWS(snowman((int)0.590));
     CHECK_THROWS(snowman(111));
     CHECK_THROWS(snowman(0));
+    
+    CHECK_THROWS(snowman(555));
+    CHECK_THROWS_AS(snowman(555), logic_error);
+    CHECK_THROWS_AS(snowman(11114511), invalid_argument);
+
+    CHECK_THROWS(snowman(2224));
+    CHECK_THROWS_AS(snowman(2224), logic_error);
+    CHECK_THROWS_AS(snowman(11110011), invalid_argument);
+
+    CHECK_THROWS(snowman(5551234));
+    CHECK_THROWS_AS(snowman(5551234), logic_error);
+    CHECK_THROWS_AS(snowman(11114011), invalid_argument);
+
+    CHECK_THROWS(snowman(123451234));
+    CHECK_THROWS_AS(snowman(123451234), logic_error);
+    CHECK_THROWS_AS(snowman(11114000), invalid_argument);
+
+    // check negative values
+    CHECK_THROWS(snowman(-1232));
+    CHECK_THROWS_AS(snowman(-1232), logic_error);
+    CHECK_THROWS_AS(snowman(-12341234), logic_error);
+
+    CHECK_THROWS(snowman(-9999));
+    CHECK_THROWS_AS(snowman(-9999), logic_error);
+    CHECK_THROWS_AS(snowman(-999999999), logic_error);
+}
+
+TEST_CASE("Check Throw message") {
+    CHECK_THROWS_WITH_MESSAGE(snowman(5), "got invalid H", "");
+    CHECK_THROWS_WITH_MESSAGE(snowman(6060), "got invalid H", "");
+    CHECK_THROWS_WITH_MESSAGE(snowman(-560), "got invalid H", "");
+    CHECK_THROWS_WITH_MESSAGE(snowman(-60600), "got invalid H", "");
+    CHECK_THROWS_WITH_MESSAGE(snowman(123456789), "got invalid H", "");
+    CHECK_THROWS_WITH_MESSAGE(snowman(-123456789), "got invalid H", "");
 }
 
 
 // getHat
-TEST_CASE("Good getHat code") {
-    CHECK(getHat(11114411) == " _===_ ");
-    CHECK(getHat(21114411) == "  ___ \n .....");
-    CHECK(getHat(31114411) == "   _  \n  /_\\ ");
-    CHECK(getHat(41114411) == "  ___ \n (_*_)");
-}
+TEST_CASE("Good Hat code") {
+    CHECK(nospaces(snowman(11114411)) == nospaces("_===_\n(.,.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(21114411)) == nospaces("  ___ \n .....\n(.,.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(31114411)) == nospaces("  _  \n  /_\\ \n(.,.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(41114411)) == nospaces("  ___ \n (_*_)\n(.,.)\n( : )\n( : )"));   
+} 
 
-TEST_CASE("Bad getHat code") {
-    CHECK_THROWS(getHat(51114411));
-    CHECK_THROWS(getHat(01114411));
-    CHECK_THROWS(getHat(1114411));
+TEST_CASE("Bad Hat code") {
+    CHECK_THROWS(snowman(51114411));
+    CHECK_THROWS(snowman(91114411));
+    CHECK_THROWS_WITH_MESSAGE(snowman(01114411), "got invalid H", "");
 }
 
 
 // getNoseMouth
-TEST_CASE("Good getNoseMouth code") {
-    CHECK(getNoseMouth(11114411) == ",");
-    CHECK(getNoseMouth(22114411) == ".");
-    CHECK(getNoseMouth(33114411) == "_");
-    CHECK(getNoseMouth(44114411) == " ");
-
+TEST_CASE("Good Nose Mouth code") {
+    CHECK(nospaces(snowman(11114411)) == nospaces("_===_\n(.,.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(22114411)) == nospaces("  ___ \n .....\n(...)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(33114411)) == nospaces("   _  \n  /_\\ \n(._.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(44114411)) == nospaces("  ___ \n (_*_)\n(. .)\n( : )\n( : )"));   
 }
 
-TEST_CASE("Bad getNoseMouth code") {
-    CHECK_THROWS(getNoseMouth(15114411));
-    CHECK_THROWS(getNoseMouth(10114411));
-    CHECK_THROWS(getNoseMouth(114411));
-
+TEST_CASE("Bad Nose Mouth code") {
+    CHECK_THROWS(snowman(15114411));
+    CHECK_THROWS(snowman(10114411));
+    CHECK_THROWS_WITH_MESSAGE(snowman(10114411), "got invalid N", "");
 }
 
 
 // getLeftEye
-TEST_CASE("Good getLeftEye code") {
-    CHECK(getLeftEye(11114411) == ".");
-    CHECK(getLeftEye(21214411) == "o");
-    CHECK(getLeftEye(31314411) == "O");
-    CHECK(getLeftEye(41414411) == "-");
+TEST_CASE("Good Left Eye code") {
+    CHECK(nospaces(snowman(11114411)) == nospaces("_===_\n(.,.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(22214411)) == nospaces("  ___ \n .....\n(o..)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(33314411)) == nospaces("   _  \n  /_\\ \n(O_.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(44414411)) == nospaces("  ___ \n (_*_)\n(- .)\n( : )\n( : )"));  
 }
 
-TEST_CASE("Bad getLeftEye code") {
-    CHECK_THROWS(getLeftEye(11514411));
-    CHECK_THROWS(getLeftEye(11014411));
-    CHECK_THROWS(getLeftEye(14411));
+TEST_CASE("Bad Left Eye code") {
+    CHECK_THROWS(snowman(11514411));
+    CHECK_THROWS(snowman(11014411));
+    CHECK_THROWS_WITH_MESSAGE(snowman(11014411), "got invalid L", "");
 }
 
 
 // getRightEye
-TEST_CASE("Good getRightEye code") {
-    CHECK(getRightEye(11114411) == ".");
-    CHECK(getRightEye(21224411) == "o");
-    CHECK(getRightEye(31334411) == "O");
-    CHECK(getRightEye(41444411) == "-");
+TEST_CASE("Good Right Eye code") {
+    CHECK(nospaces(snowman(11114411)) == nospaces("_===_\n(.,.)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(22224411)) == nospaces("  ___ \n .....\n(o.o)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(33334411)) == nospaces("   _  \n  /_\\ \n(O_O)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(44444411)) == nospaces("  ___ \n (_*_)\n(- -)\n( : )\n( : )"));
 }
 
-TEST_CASE("Bad getRightEye code") {
-    CHECK_THROWS(getRightEye(11154411));
-    CHECK_THROWS(getRightEye(11104411));
-    CHECK_THROWS(getRightEye(4411));
+TEST_CASE("Bad Right Eye code") {
+    CHECK_THROWS(snowman(11154411));
+    CHECK_THROWS(snowman(11104411));
+    CHECK_THROWS_WITH_MESSAGE(snowman(11104411), "got invalid R", "");
 }
 
 
 // getLeftArm
-TEST_CASE("Good getLeftArm code") {
-    CHECK(getLeftArm(11111411) == " ");
-    CHECK(getLeftArm(21112411) == "\\");
-    CHECK(getLeftArm(31113411) == "/");
-    CHECK(getLeftArm(41114411) == " ");
+TEST_CASE("Good Left Arm code") {
+    CHECK(nospaces(snowman(11111411)) == nospaces("_===_\n(.,.)\n<( : )\n( : )"));
+    CHECK(nospaces(snowman(22222411)) == nospaces("  ___ \n .....\n\\(o.o)\n( : )\n( : )"));
+    CHECK(nospaces(snowman(33333411)) == nospaces("   _  \n  /_\\ \n(O_O)\n/( : )\n( : )"));
+    CHECK(nospaces(snowman(44444411)) == nospaces("  ___ \n (_*_)\n(- -)\n( : )\n( : )"));  
 }
 
-TEST_CASE("Bad getLeftArm code") {
-    CHECK_THROWS(getLeftArm(51115411));
-    CHECK_THROWS(getLeftArm(01110411));
-    CHECK_THROWS(getLeftArm(411));
-}
-
-
-// getLeftArm_low
-TEST_CASE("Good getLeftArm_low code") {
-    CHECK(getLeftArm_low(11111411) == "<");
-    CHECK(getLeftArm_low(21112411) == " ");
-    CHECK(getLeftArm_low(31113411) == " ");
-    CHECK(getLeftArm_low(41114411) == " ");
-}
-
-TEST_CASE("Bad getLeftArm_low code") {
-    CHECK_THROWS(getLeftArm_low(51115411));
-    CHECK_THROWS(getLeftArm_low(01110411));
-    CHECK_THROWS(getLeftArm_low(411));
+TEST_CASE("Bad Left Arm code") {
+    CHECK_THROWS(snowman(11115111));
+    CHECK_THROWS(snowman(11110111));
+    CHECK_THROWS_WITH_MESSAGE(snowman(11119111), "got invalid X", "");
 }
 
 
 // getRightArm
-TEST_CASE("Good getRightArm code") {
-    CHECK(getRightArm(11111111) == " ");
-    CHECK(getRightArm(21112211) == "/");
-    CHECK(getRightArm(31113311) == "\\");
-    CHECK(getRightArm(41114411) == " ");
+TEST_CASE("Good Right Arm code") {
+    CHECK(nospaces(snowman(11111111)) == nospaces("_===_\n(.,.)\n<( : )>\n( : )"));
+    CHECK(nospaces(snowman(22222211)) == nospaces("  ___ \n .....\n\\(o.o)/\n( : )\n( : )"));
+    CHECK(nospaces(snowman(44444411)) == nospaces("  ___ \n (_*_)\n(- -)\n( : )\n( : )")); 
 }
 
-TEST_CASE("Bad getRightArm code") {
-    CHECK_THROWS(getRightArm(51115511));
-    CHECK_THROWS(getRightArm(01110011));
-    CHECK_THROWS(getRightArm(11));
-}
-
-
-// getRightArm_low
-TEST_CASE("Good getRightArm_low code") {
-    CHECK(getRightArm_low(11111111) == ">");
-    CHECK(getRightArm_low(21112211) == " ");
-    CHECK(getRightArm_low(31113311) == " ");
-    CHECK(getRightArm_low(41114411) == " ");
-}
-
-TEST_CASE("Bad getRightArm_low code") {
-    CHECK_THROWS(getRightArm_low(51115511));
-    CHECK_THROWS(getRightArm_low(01110011));
-    CHECK_THROWS(getRightArm_low(11));
+TEST_CASE("Bad Right Arm code") {
+    CHECK_THROWS(snowman(11111511));
+    CHECK_THROWS(snowman(11111011));
+    CHECK_THROWS_WITH_MESSAGE(snowman(11111911), "got invalid Y", "");
 }
 
 
 // getTorso
-TEST_CASE("Good getTorso code") {
-    CHECK(getTorso(11114411) == " : ");
-    CHECK(getTorso(21114421) == "] [");
-    CHECK(getTorso(31114431) == "> <");
-    CHECK(getTorso(41114441) == "   ");
+TEST_CASE("Good Torso code") {
+    CHECK(nospaces(snowman(11111111)) == nospaces("_===_\n(.,.)\n<( : )>\n( : )"));
+    CHECK(nospaces(snowman(22222221)) == nospaces("  ___ \n .....\n\\(o.o)/\n(] [)\n( : )"));
+    CHECK(nospaces(snowman(44444441)) == nospaces("  ___ \n (_*_)\n(- -)\n(   )\n( : )"));
 }
 
-TEST_CASE("Bad getTorso code") {
-    CHECK_THROWS(getTorso(51114451));
-    CHECK_THROWS(getTorso(11114461));
-    CHECK_THROWS(getTorso(1));
+TEST_CASE("Bad Torso code") {
+    CHECK_THROWS(snowman(11111151));
+    CHECK_THROWS(snowman(11111101));
+    CHECK_THROWS_WITH_MESSAGE(snowman(11111191), "got invalid T", "");
 }
 
 
 // getBase
-TEST_CASE("Good getBase code") {
-    CHECK(getBase(11114411) == " : ");
-    CHECK(getBase(21114412) == "\" \"");
-    CHECK(getBase(31114413) == "___");
-    CHECK(getBase(41114414) == "   ");
+TEST_CASE("Good Base code") {
+    CHECK(nospaces(snowman(11111111)) == nospaces("_===_\n(.,.)\n<( : )>\n( : )"));
+    CHECK(nospaces(snowman(22222222)) == nospaces("  ___ \n .....\n\\(o.o)/\n(] [)\n(\" \")"));
+    CHECK(nospaces(snowman(44444444)) == nospaces("  ___ \n (_*_)\n(- -)\n(   )\n(   )"));
 }
 
-TEST_CASE("Bad getBase code") {
-    CHECK_THROWS(getBase(51114415));
-    CHECK_THROWS(getBase(01114417));
+TEST_CASE("Bad Base code") {
+    CHECK_THROWS(snowman(11111115));
+    CHECK_THROWS(snowman(11111110));
+    CHECK_THROWS_WITH_MESSAGE(snowman(11111119), "got invalid B", "");
 }
