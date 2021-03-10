@@ -87,11 +87,10 @@ string getLeftArm(int x){
 	switch(x_){
 		case 1:
 		case 4:
+		case 3:
 			return " ";
 		case 2:
 			return "\\";
-		case 3:
-			return "/";
 		default:
 			throw invalid_argument ("got invalid X");
 	}
@@ -104,9 +103,10 @@ string getLeftArm_low(int x){
 		case 1:
 			return "<";
 		case 2:
-		case 3:
 		case 4:
 			return " ";
+		case 3:
+			return "/";
 		default:
 			throw invalid_argument ("got invalid X");
 	}
@@ -118,11 +118,10 @@ string getRightArm(int x){
 	switch(y){
 		case 1:
 		case 4:
+		case 3:
 			return " ";
 		case 2:
 			return "/";
-		case 3:
-			return "\\";
 		default:
 			throw invalid_argument ("got invalid Y");
 	}
