@@ -134,9 +134,10 @@ string getRightArm_low(int x){
 		case 1:
 			return ">";
 		case 2:
-		case 3:
 		case 4:
 			return " ";
+		case 3:
+			return "\\";
 		default:
 			throw invalid_argument ("got invalid Y");
 	}
