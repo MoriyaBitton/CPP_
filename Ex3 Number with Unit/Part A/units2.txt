@@ -1,0 +1,8 @@
+1km = 1000m
+1m = 100cm
+1cm = 10mm
+1mm = 1000000nm
+1nm = 10a
+1usd = 74.54inr
+1ero = 1.2usd
+1ero = 3.93ils
