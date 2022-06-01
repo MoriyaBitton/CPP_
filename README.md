@@ -1,3 +1,4 @@
 # CPP TASKS
 
-### Ariel University, Israel || Semester B - Spring 2021
+###### Ariel University, Israel || Semester B 2021
+
